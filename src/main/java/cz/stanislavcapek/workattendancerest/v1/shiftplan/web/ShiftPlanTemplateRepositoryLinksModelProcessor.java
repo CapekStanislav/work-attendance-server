@@ -22,13 +22,8 @@ public class ShiftPlanTemplateRepositoryLinksModelProcessor
     @Override
     public RepositoryLinksResource process(RepositoryLinksResource model) {
 
-        System.out.println("CustomResourceProcessor.process");
-
         final Link baseMappingLink = links.getBaseMappingLink();
         final Link givenYearLink = links.getGivenYearLink();
-
-        System.out.println("baseMappingLink = " + baseMappingLink);
-        System.out.println("givenYearLink = " + givenYearLink);
 
         model.add(baseMappingLink, givenYearLink);
 
