@@ -123,14 +123,22 @@ public class WorkAttendanceUtilService {
      * @param shift
      */
     public void calculateShift(Shift shift) {
+
+        correctShiftTime(shift);
+
+        timeCounter.calculate(shift);
+        paymentsCounter.calculate(shift);
+    }
+
+    private void correctShiftTime(Shift shift) {
         final LocalDateTime start = shift.getStart();
         final LocalDateTime end = shift.getEnd();
 
         if (start.toLocalTime().isAfter(end.toLocalTime())) {
             shift.setEnd(start.plusDays(1).with(end.toLocalTime()));
+        } else {
+            shift.setEnd(start.with(end.toLocalTime()));
         }
-        timeCounter.calculate(shift);
-        paymentsCounter.calculate(shift);
     }
 
 
