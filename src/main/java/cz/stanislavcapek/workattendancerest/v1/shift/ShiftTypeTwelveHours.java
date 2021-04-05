@@ -59,7 +59,12 @@ public enum ShiftTypeTwelveHours {
     /**
      * Určuje, že se jedná o den, kdy neproběhla směna a její délka je {@code 0}.
      */
-    NONE(0, "žádná");
+    NONE(0, "žádná"),
+
+    /**
+     * Určuje, že se jedná jinou směnu, než je uvedené ve výčtu.
+     */
+    OTHER(0,"jiná");
 
     private final double shiftLength;
     @JsonValue
