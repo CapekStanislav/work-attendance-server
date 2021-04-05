@@ -79,7 +79,6 @@ public class Shift {
             case HOME_CARE:
             case INABILITY:
             case DAY:
-            case OVERTIME:
                 this.setStart(start.with(seven));
                 this.setEnd(start.with(nineteen));
                 break;
@@ -90,6 +89,10 @@ public class Shift {
             case TRAINING:
                 this.setStart(start.with(seven));
                 this.setEnd(start.plusMinutes(((long) (TRAINING.getShiftLength() * 60))));
+                break;
+            case OVERTIME:
+            case OTHER:
+                // Start and End as same as it was set
                 break;
         }
     }

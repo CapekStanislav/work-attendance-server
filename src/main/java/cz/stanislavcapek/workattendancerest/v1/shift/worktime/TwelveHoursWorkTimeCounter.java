@@ -47,6 +47,7 @@ public class TwelveHoursWorkTimeCounter implements WorkTimeCounter {
             case DAY:
             case TRAINING:
             case OVERTIME:
+            case OTHER:
                 setWorkingTime(workTime, inHours, 0d, 0d);
                 break;
             case NONE:
