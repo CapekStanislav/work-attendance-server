@@ -12,7 +12,7 @@ import java.util.Arrays;
 public enum Month {
 
     JANUARY("leden", 1),
-    FEBRUARY("unor", 2),
+    FEBRUARY("únor", 2),
     MARCH("březen", 3),
     APRIL("duben", 4),
     MAY("květen", 5),
