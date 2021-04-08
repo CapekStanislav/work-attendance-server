@@ -1,11 +1,16 @@
 package cz.stanislavcapek.workattendancerest.v1.pdf;
 
+import org.apache.fontbox.ttf.TTFParser;
+import org.apache.fontbox.ttf.TrueTypeFont;
+import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.*;
+import org.apache.pdfbox.pdmodel.font.encoding.Encoding;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.ResourceUtils;
 import org.vandeseer.easytable.TableDrawer;
 import org.vandeseer.easytable.settings.HorizontalAlignment;
 import org.vandeseer.easytable.structure.Row;
@@ -13,8 +18,10 @@ import org.vandeseer.easytable.structure.Table;
 import org.vandeseer.easytable.structure.cell.TextCell;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,6 +42,8 @@ public class WorkingTimeRecordPdfFactory {
     private static final String TITLE = "Evidence pracovní doby";
     private static final String FONTS_CALIBRI_TTF = "fonts/calibri.ttf";
     private static final String FONTS_CALIBRIB_TTF = "fonts/calibrib.ttf";
+    private static final String FONTS_ARIAL_TTF = "fonts/arial.ttf";
+    private static final String FONTS_ARIALBD_TTF = "fonts/arialbd.ttf";
 
     private static LocalDate period;
     private static PDFont normalFont;
@@ -57,18 +66,13 @@ public class WorkingTimeRecordPdfFactory {
         PDPage page = new PDPage(A4);
         document.addPage(page);
 
-        // load font
-        if (normalFont == null || boldFont == null) {
-            final ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        // loading normal font
+        ClassPathResource arialResource = new ClassPathResource(FONTS_ARIAL_TTF);
+        normalFont = PDType0Font.load(document, arialResource.getInputStream());
 
-            try (final InputStream inputStream = classLoader.getResourceAsStream(FONTS_CALIBRI_TTF)) {
-                normalFont = PDType0Font.load(document, inputStream, true);
-            }
-
-            try (InputStream inputStream = classLoader.getResourceAsStream(FONTS_CALIBRIB_TTF)) {
-                boldFont = PDType0Font.load(document, inputStream, true);
-            }
-        }
+        // loading bold font
+        final ClassPathResource arialbdResource = new ClassPathResource(FONTS_ARIALBD_TTF);
+        boldFont = PDType0Font.load(document,arialbdResource.getInputStream());
 
         final Table.TableBuilder builder = Table.builder();
 
@@ -108,7 +112,7 @@ public class WorkingTimeRecordPdfFactory {
         tablesToDraw.add(createFooter(model, normalFont));
         tablesToDraw.add(createSigning(normalFont));
 
-        float starty = page.getMediaBox().getHeight() - PADDING;
+        float startY = page.getMediaBox().getHeight() - PADDING;
 
         try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
             for (Table table : tablesToDraw) {
@@ -117,11 +121,11 @@ public class WorkingTimeRecordPdfFactory {
                         .contentStream(contentStream)
                         .table(table)
                         .startX(PADDING)
-                        .startY(starty)
+                        .startY(startY)
                         .endY(PADDING)
                         .build()
                         .draw();
-                starty -= table.getHeight() + PADDING / 2;
+                startY -= table.getHeight() + PADDING / 2;
             }
         }
 

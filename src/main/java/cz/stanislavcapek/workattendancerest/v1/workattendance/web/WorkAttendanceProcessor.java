@@ -46,7 +46,9 @@ public class WorkAttendanceProcessor implements RepresentationModelProcessor<Ent
 
         final Link typesLink = getLink(workAttendance, "types");
 
-        model.add(workTimeSumLink, premiumPaymentsSumLink, lockLink, typesLink);
+        final Link generateLink = getLink(workAttendance, "generate");
+
+        model.add(workTimeSumLink, premiumPaymentsSumLink, lockLink, typesLink,generateLink);
     }
 
     private Link getLink(WorkAttendance workAttendance, String text) {
