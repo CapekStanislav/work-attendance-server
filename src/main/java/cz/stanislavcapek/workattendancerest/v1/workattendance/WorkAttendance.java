@@ -30,6 +30,9 @@ public class WorkAttendance {
     @OneToOne
     private Employee employee;
 
+    /**
+     * Month value in range 1 - 12
+     */
     private int month;
 
     private int year;
@@ -48,7 +51,7 @@ public class WorkAttendance {
     private List<Shift> shifts;
 
     public WorkAttendance(long workAttendanceId, Employee employee, int month,
-                          int year, double weeklyWorkTime, double monthFund,
+                          int year, double weeklyWorkTime,
                           double previousMonth, double nextMonth, boolean locked,
                           List<Shift> shifts) {
         this.workAttendanceId = workAttendanceId;

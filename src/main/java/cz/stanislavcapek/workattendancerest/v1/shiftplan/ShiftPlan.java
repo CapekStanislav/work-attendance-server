@@ -4,12 +4,12 @@ import cz.stanislavcapek.workattendancerest.v1.employee.Employee;
 import cz.stanislavcapek.workattendancerest.v1.model.Month;
 import cz.stanislavcapek.workattendancerest.v1.model.WorkTimeFund;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
+import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shiftplan.exception.InvalidMonthNumberException;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,7 +31,7 @@ import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
 public class ShiftPlan {
 
     @ToString.Exclude
-    private final XSSFWorkbook workbook;
+    private final Workbook workbook;
     private final WorkTimeFund.TypeOfWeeklyWorkTime typeOfWeeklyWorkTime;
     @ToString.Exclude
     private final Map<Integer, Map<Integer, WorkAttendance>> shiftsInYear = new TreeMap<>();
@@ -42,7 +42,7 @@ public class ShiftPlan {
      * Map {@code <Měsíc, Map<ID,WorkAttendance>> }
      */
 
-    public ShiftPlan(XSSFWorkbook workbook, WorkTimeFund.TypeOfWeeklyWorkTime typeOfWeeklyWorkTime) {
+    public ShiftPlan(Workbook workbook, WorkTimeFund.TypeOfWeeklyWorkTime typeOfWeeklyWorkTime) {
         this.workbook = workbook;
         this.typeOfWeeklyWorkTime = typeOfWeeklyWorkTime;
         this.year = getYear();
@@ -55,7 +55,7 @@ public class ShiftPlan {
      * @return číslo roku v šabloně, {@code nenalezeno} = 0
      */
     public int getYear() {
-        XSSFCell yearCell = workbook.getSheetAt(0).getRow(0).getCell(0);
+        Cell yearCell = workbook.getSheetAt(0).getRow(0).getCell(0);
         if (yearCell != null) {
             if (yearCell.getCellType() == NUMERIC) {
                 return (int) yearCell.getNumericCellValue();
@@ -203,24 +203,27 @@ public class ShiftPlan {
     }
 
     private WorkAttendance convertToRecord(ShiftsByMonth shiftsByMonth) {
-        Employee employee = shiftsByMonth.getEmployee();
+        // have to be recalculate
+        final int nextMonth = 0;
 
-        // FIXME: 18.01.2021 suppressed error
-        return null;
-//        return new WorkAttendance(
-//                employee,
-//                shiftsByMonth.getMonth(),
-//                shiftsByMonth.getYear(),
-//                typeOfWeeklyWorkTime,
-//                shiftsByMonth.getFromLastMonth(),
-//                shiftsByMonth.getShifts()
-//        );
+        final WorkAttendance workAttendance = new WorkAttendance();
+        workAttendance.setEmployee(shiftsByMonth.getEmployee());
+        workAttendance.setYear(shiftsByMonth.getYear());
+        workAttendance.setMonth(shiftsByMonth.getMonth());
+
+        workAttendance.setLocked(false);
+        workAttendance.setWeeklyWorkTime(WorkTimeFund.TypeOfWeeklyWorkTime.MULTISHIFT_CONTINUOUS.getFund());
+
+        workAttendance.setMonthFund(shiftsByMonth.getWorkingTimeFund());
+        workAttendance.setPreviousMonth(shiftsByMonth.getFromLastMonth());
+        workAttendance.setNextMonth(nextMonth);
+        workAttendance.setShifts(shiftsByMonth.getShifts());
+
+        return workAttendance;
     }
 
     private WorkAttendance convertToRecord(List<Shift> overtimes, int year, int month, int id) {
-        final Employee employee = getEmployee(id);
 
-        final int lastMonth = 0;
         // FIXME: 18.01.2021 suppressed error
         return null;
 //        return new WorkAttendance(
@@ -244,10 +247,10 @@ public class ShiftPlan {
         final int[] ids = new int[numberOfEmployees];
         month = month - 1;
 
-        XSSFSheet sheet = workbook.getSheetAt(month);
+        Sheet sheet = workbook.getSheetAt(month);
         for (int i = 0; i < numberOfEmployees; i++) {
-            XSSFRow row = sheet.getRow(2 + i);
-            XSSFCell cell = row.getCell(2);
+            Row row = sheet.getRow(2 + i);
+            Cell cell = row.getCell(2);
             ids[i] = (int) cell.getNumericCellValue();
         }
         return ids;
@@ -263,11 +266,11 @@ public class ShiftPlan {
     private int getNumberOfEmployees(int month) {
         month = month - 1;
 
-        XSSFSheet sheet = workbook.getSheetAt(month);
+        Sheet sheet = workbook.getSheetAt(month);
 
         int count = 0;
         int rowIndex = 2;
-        final XSSFRow sheetRow = sheet.getRow(rowIndex);
+        final Row sheetRow = sheet.getRow(rowIndex);
         Cell cell = null;
         if (sheetRow != null) {
             cell = sheetRow.getCell(2);
@@ -276,7 +279,7 @@ public class ShiftPlan {
         while (cell != null && cell.getNumericCellValue() > 0) {
             count++;
             rowIndex++;
-            final XSSFRow row = sheet.getRow(rowIndex);
+            final Row row = sheet.getRow(rowIndex);
             if (row != null) {
                 cell = row.getCell(2);
             } else {
@@ -303,7 +306,7 @@ public class ShiftPlan {
 
         int employeeRow = getEmployeeRow(id);
 
-        XSSFRow row = workbook.getSheetAt(month - 1).getRow(employeeRow);
+        Row row = workbook.getSheetAt(month - 1).getRow(employeeRow);
         DataFormatter formatter = new DataFormatter();
 
         List<String> finalWholeRow = new ArrayList<>();
@@ -332,7 +335,7 @@ public class ShiftPlan {
         final int[] i = {0};
         final int[] employeeRow = {0};
 
-        XSSFSheet sheet = workbook.getSheetAt(0);
+        Sheet sheet = workbook.getSheetAt(0);
         sheet.forEach(row -> {
             XSSFCell cell = (XSSFCell) row.getCell(2);
             if (cell != null) {
@@ -359,7 +362,7 @@ public class ShiftPlan {
         int row = getEmployeeRow(id);
 
         if (row != 0) {
-            XSSFCell cell = workbook.getSheetAt(0).getRow(row).getCell(0);
+            Cell cell = workbook.getSheetAt(0).getRow(row).getCell(0);
             if (cell != null) {
                 name = cell.getStringCellValue();
             }

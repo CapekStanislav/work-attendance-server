@@ -7,12 +7,7 @@ import cz.stanislavcapek.workattendancerest.v1.shift.ShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shiftplan.exception.InvalidFormatXslxExeption;
 import cz.stanislavcapek.workattendancerest.v1.shiftplan.exception.InvalidMonthNumberException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +27,7 @@ class OvertimesByMonth {
 
     List<Shift> overtimes = new ArrayList<>();
 
-    private final XSSFSheet sheet;
+    private final Sheet sheet;
 
     /**
      * Konstruktor
@@ -44,7 +39,7 @@ class OvertimesByMonth {
      *                                   v šabloně sekci s přesčasy
      * @throws IllegalArgumentException  měsíc je mimo rozmezí
      */
-    OvertimesByMonth(XSSFWorkbook workbook, int month, int id) {
+    OvertimesByMonth(Workbook workbook, int month, int id) {
         if (!Month.isValidMonth(month)) {
             throw new InvalidMonthNumberException(month);
         }
@@ -80,7 +75,7 @@ class OvertimesByMonth {
      */
     private void loadOvertimesById(int id) {
         int indexOfRow = 17;
-        XSSFRow entryRow = sheet.getRow(indexOfRow);
+        Row entryRow = sheet.getRow(indexOfRow);
         ShiftFactory factory = new DefaultShiftFactory();
 
         while (entryRow != null) {
@@ -88,10 +83,10 @@ class OvertimesByMonth {
             final int startTimePos = 2;
             final int endTimePos = 3;
             final int idPos = 4;
-            final XSSFCell entryDate = entryRow.getCell(datePos);
-            final XSSFCell entryStart = entryRow.getCell(startTimePos);
-            final XSSFCell entryEnd = entryRow.getCell(endTimePos);
-            final XSSFCell entryId = entryRow.getCell(idPos);
+            final Cell entryDate = entryRow.getCell(datePos);
+            final Cell entryStart = entryRow.getCell(startTimePos);
+            final Cell entryEnd = entryRow.getCell(endTimePos);
+            final Cell entryId = entryRow.getCell(idPos);
 
             // checking empty values - true skip the row
             if (entryDate == null || entryStart == null || entryEnd == null || entryId == null) {

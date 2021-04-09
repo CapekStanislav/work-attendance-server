@@ -21,6 +21,7 @@ public class ShiftPlanTemplateLinks {
     static final String API_PATH = "/api/v1";
     static final String CURRENT_YEAR_TEMPLATE = BASE_MAPPING;
     static final String GIVEN_YEAR_TEMPLATE = BASE_MAPPING + "/{year}";
+    static final String PROCESS_TEMPLATE = BASE_MAPPING + "/process";
 
     static final LinkRelation CURRENT_YEAR_REL = LinkRelation.of("current-year-template");
     static final LinkRelation GIVEN_YEAR_REL = LinkRelation.of("given-year-template");
