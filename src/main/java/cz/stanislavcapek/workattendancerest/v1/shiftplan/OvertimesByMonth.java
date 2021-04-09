@@ -1,7 +1,7 @@
 package cz.stanislavcapek.workattendancerest.v1.shiftplan;
 
 import cz.stanislavcapek.workattendancerest.v1.model.Month;
-import cz.stanislavcapek.workattendancerest.v1.shift.DefaultShiftFactory;
+import cz.stanislavcapek.workattendancerest.v1.shift.service.DefaultShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;

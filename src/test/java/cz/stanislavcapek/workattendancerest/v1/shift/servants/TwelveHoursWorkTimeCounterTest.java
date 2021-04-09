@@ -1,6 +1,6 @@
 package cz.stanislavcapek.workattendancerest.v1.shift.servants;
 
-import cz.stanislavcapek.workattendancerest.v1.shift.DefaultShiftFactory;
+import cz.stanislavcapek.workattendancerest.v1.shift.service.DefaultShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.TwelveHoursWorkTimeCounter;

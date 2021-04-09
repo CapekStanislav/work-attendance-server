@@ -1,6 +1,7 @@
 package cz.stanislavcapek.workattendancerest.v1.shift;
 
 import cz.stanislavcapek.workattendancerest.v1.shift.exception.IllegalShiftLengthException;
+import cz.stanislavcapek.workattendancerest.v1.shift.service.DefaultShiftFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -93,5 +94,4 @@ class DefaultShiftFactoryTest {
 
     }
 
-    // TODO: 04.01.2021 test other creation methods
 }

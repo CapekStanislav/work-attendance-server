@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.stanislavcapek.workattendancerest.v1.shiftplan;
+package cz.stanislavcapek.workattendancerest.v1.shiftplan.service;
 
 import cz.stanislavcapek.workattendancerest.v1.employee.Employee;
 import cz.stanislavcapek.workattendancerest.v1.model.Month;

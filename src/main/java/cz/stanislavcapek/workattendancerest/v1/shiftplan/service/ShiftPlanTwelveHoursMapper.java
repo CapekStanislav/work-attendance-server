@@ -1,6 +1,7 @@
-package cz.stanislavcapek.workattendancerest.v1.shiftplan;
+package cz.stanislavcapek.workattendancerest.v1.shiftplan.service;
 
 import cz.stanislavcapek.workattendancerest.v1.model.WorkTimeFund;
+import cz.stanislavcapek.workattendancerest.v1.shiftplan.ShiftPlan;
 import cz.stanislavcapek.workattendancerest.v1.shiftplan.exception.WrongShiftTemplateFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;

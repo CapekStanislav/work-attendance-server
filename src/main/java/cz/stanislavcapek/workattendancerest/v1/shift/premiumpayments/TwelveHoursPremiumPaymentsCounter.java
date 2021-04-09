@@ -1,6 +1,6 @@
 package cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments;
 
-import cz.stanislavcapek.workattendancerest.v1.holiday.HolidayRepository;
+import cz.stanislavcapek.workattendancerest.v1.holiday.web.HolidayRepository;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeCounter;

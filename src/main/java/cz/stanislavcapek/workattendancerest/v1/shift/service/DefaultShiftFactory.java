@@ -1,5 +1,8 @@
-package cz.stanislavcapek.workattendancerest.v1.shift;
+package cz.stanislavcapek.workattendancerest.v1.shift.service;
 
+import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
+import cz.stanislavcapek.workattendancerest.v1.shift.ShiftFactory;
+import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shift.exception.IllegalShiftLengthException;
 import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPayments;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTime;

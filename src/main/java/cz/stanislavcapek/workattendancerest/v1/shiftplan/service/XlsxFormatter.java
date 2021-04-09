@@ -1,4 +1,4 @@
-package cz.stanislavcapek.workattendancerest.v1.shiftplan;
+package cz.stanislavcapek.workattendancerest.v1.shiftplan.service;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;

@@ -1,8 +1,8 @@
 package cz.stanislavcapek.workattendancerest.v1.appconfig;
 
 import cz.stanislavcapek.workattendancerest.v1.holiday.Holiday;
-import cz.stanislavcapek.workattendancerest.v1.holiday.HolidayLoaderFromUrlService;
-import cz.stanislavcapek.workattendancerest.v1.holiday.HolidayRepository;
+import cz.stanislavcapek.workattendancerest.v1.holiday.service.HolidayLoaderFromUrlService;
+import cz.stanislavcapek.workattendancerest.v1.holiday.web.HolidayRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

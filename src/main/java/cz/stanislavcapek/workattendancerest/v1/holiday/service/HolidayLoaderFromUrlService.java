@@ -1,5 +1,6 @@
-package cz.stanislavcapek.workattendancerest.v1.holiday;
+package cz.stanislavcapek.workattendancerest.v1.holiday.service;
 
+import cz.stanislavcapek.workattendancerest.v1.holiday.Holiday;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

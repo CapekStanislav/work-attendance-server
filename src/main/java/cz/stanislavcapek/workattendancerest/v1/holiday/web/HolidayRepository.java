@@ -1,5 +1,6 @@
-package cz.stanislavcapek.workattendancerest.v1.holiday;
+package cz.stanislavcapek.workattendancerest.v1.holiday.web;
 
+import cz.stanislavcapek.workattendancerest.v1.holiday.Holiday;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

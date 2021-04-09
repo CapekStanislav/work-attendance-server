@@ -1,8 +1,9 @@
-package cz.stanislavcapek.workattendancerest.v1.workattendance;
+package cz.stanislavcapek.workattendancerest.v1.workattendance.service;
 
 import cz.stanislavcapek.workattendancerest.v1.employee.Employee;
 import cz.stanislavcapek.workattendancerest.v1.employee.web.EmployeeRepository;
 import cz.stanislavcapek.workattendancerest.v1.shiftplan.ShiftPlan;
+import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.exception.YearsNotMatchException;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.web.WorkAttendanceEventHandler;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.web.WorkAttendanceRepository;
