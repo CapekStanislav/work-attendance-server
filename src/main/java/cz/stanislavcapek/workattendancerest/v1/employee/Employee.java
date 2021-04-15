@@ -35,7 +35,13 @@ public class Employee {
     private String lastName;
 
     public void setAssignedId(int assignedId) {
-        throw new IllegalStateException("Assigned ID can not be changed!");
+        if (assignedId <= 0) {
+            throw new IllegalStateException("Assigned ID must be greater then zero.");
+        }
+        if (this.assignedId > 0) {
+            throw new IllegalStateException("Assigned ID can not be changed!");
+        }
+        this.assignedId = assignedId;
     }
 
     @JsonIgnore
