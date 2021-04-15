@@ -35,6 +35,7 @@ public class WorkAttendanceEventHandler {
     @HandleBeforeCreate
     public void handleCreation(WorkAttendance workAttendance) {
         checkOneMonthAheadCondition(workAttendance);
+        checkOneMonthBackCondition(workAttendance);
         checkDuplicationCondition(workAttendance);
         checkValidState(workAttendance);
         prepare(workAttendance);
@@ -75,7 +76,20 @@ public class WorkAttendanceEventHandler {
         final LocalDate workAttendanceDate = LocalDate.of(workAttendance.getYear(), workAttendance.getMonth(), 1);
         if (currentMonth.until(workAttendanceDate).toTotalMonths() > 1) {
             String msg = String.format(
-                    "Fail to create new instance ( %s %d). Cannot create new instance more then one month ahead!",
+                    "Fail to create new instance ( %s %d). Cannot create new instance more than one month ahead!",
+                    workAttendanceDate.getMonth(),
+                    workAttendanceDate.getYear()
+            );
+            throw new IllegalStateException(msg);
+        }
+    }
+
+    private void checkOneMonthBackCondition(WorkAttendance workAttendance) {
+        final LocalDate currentMonth = LocalDate.now().withDayOfMonth(1);
+        final LocalDate workAttendanceDate = LocalDate.of(workAttendance.getYear(), workAttendance.getMonth(), 1);
+        if (Math.abs(currentMonth.until(workAttendanceDate).toTotalMonths()) > 1) {
+            String msg = String.format(
+                    "Fail to create new instance ( %s %d). Cannot create new instance more than one month back!",
                     workAttendanceDate.getMonth(),
                     workAttendanceDate.getYear()
             );
@@ -89,7 +103,7 @@ public class WorkAttendanceEventHandler {
     private void checkValidState(WorkAttendance workAttendance) {
 
         if (workAttendance.getWeeklyWorkTime() < 0) {
-            throw new InvalidPropertiesStateException("Weekly work time has to be equal or greater then 0.");
+            throw new InvalidPropertiesStateException("Weekly work time has to be equal or greater than 0.");
         }
 
         final Employee employee = workAttendance.getEmployee();
