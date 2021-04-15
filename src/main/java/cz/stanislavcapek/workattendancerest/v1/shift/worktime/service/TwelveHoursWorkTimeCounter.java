@@ -1,7 +1,8 @@
-package cz.stanislavcapek.workattendancerest.v1.shift.worktime;
+package cz.stanislavcapek.workattendancerest.v1.shift.worktime.service;
 
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTime;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;

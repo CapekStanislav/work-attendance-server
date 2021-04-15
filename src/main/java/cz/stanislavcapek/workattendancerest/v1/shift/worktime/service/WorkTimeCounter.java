@@ -1,4 +1,4 @@
-package cz.stanislavcapek.workattendancerest.v1.shift.worktime;
+package cz.stanislavcapek.workattendancerest.v1.shift.worktime.service;
 
 
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;

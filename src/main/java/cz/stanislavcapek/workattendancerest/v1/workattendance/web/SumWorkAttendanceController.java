@@ -1,9 +1,9 @@
 package cz.stanislavcapek.workattendancerest.v1.workattendance.web;
 
 import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPaymentsSum;
-import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPaymentsSumCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.PremiumPaymentsSumCounter;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeSum;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeSumCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeSumCounter;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import lombok.AllArgsConstructor;
 import org.springframework.data.rest.webmvc.BasePathAwareController;

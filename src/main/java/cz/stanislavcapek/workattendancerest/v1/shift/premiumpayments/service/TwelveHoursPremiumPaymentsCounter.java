@@ -1,9 +1,10 @@
-package cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments;
+package cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service;
 
 import cz.stanislavcapek.workattendancerest.v1.holiday.web.HolidayRepository;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPayments;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeCounter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

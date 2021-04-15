@@ -6,6 +6,10 @@ import cz.stanislavcapek.workattendancerest.v1.shift.service.DefaultShiftFactory
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.*;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.TwelveHoursWorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.TwelveHoursWorkTimeSumCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeSumCounter;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;

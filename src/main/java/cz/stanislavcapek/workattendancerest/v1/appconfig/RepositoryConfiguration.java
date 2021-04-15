@@ -5,9 +5,9 @@ import cz.stanislavcapek.workattendancerest.v1.employee.web.EmployeeEventHandler
 import cz.stanislavcapek.workattendancerest.v1.employee.web.EmployeeRepository;
 import cz.stanislavcapek.workattendancerest.v1.holiday.Holiday;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
-import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPaymentsCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.PremiumPaymentsCounter;
 import cz.stanislavcapek.workattendancerest.v1.shift.web.ShiftEventHandler;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeCounter;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,15 +36,6 @@ public class RepositoryConfiguration {
                                         final WorkTimeCounter timeCounter) {
         return new ShiftEventHandler(paymentsCounter, timeCounter);
     }
-
-//    @Bean
-//    WorkAttendanceEventHandler workAttendanceEventHandler(ShiftFactory factory, WorkTimeSumCounter counter,
-//                                                          WorkAttendanceRepository repository,
-//                                                          WorkTimeCounter timeCounter,
-//                                                          PremiumPaymentsCounter paymentsCounter,
-//                                                          WorkAttendanceUtilService utilService) {
-//        return new WorkAttendanceEventHandler(factory, counter, repository, timeCounter, paymentsCounter,utilService);
-//    }
 
     @Autowired
     public void configure(

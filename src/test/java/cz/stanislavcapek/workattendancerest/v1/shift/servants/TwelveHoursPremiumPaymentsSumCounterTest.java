@@ -1,13 +1,17 @@
 package cz.stanislavcapek.workattendancerest.v1.shift.servants;
 
 import cz.stanislavcapek.workattendancerest.v1.holiday.web.HolidayRepository;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.PremiumPaymentsCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.PremiumPaymentsSumCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.TwelveHoursPremiumPaymentsCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.TwelveHoursPremiumPaymentsSumCounter;
 import cz.stanislavcapek.workattendancerest.v1.shift.service.DefaultShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftFactory;
 import cz.stanislavcapek.workattendancerest.v1.shift.ShiftTypeTwelveHours;
 import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.*;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.TwelveHoursWorkTimeCounter;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.TwelveHoursWorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeCounter;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

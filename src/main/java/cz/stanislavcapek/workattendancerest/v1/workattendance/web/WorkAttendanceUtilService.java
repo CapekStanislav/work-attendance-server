@@ -1,10 +1,10 @@
 package cz.stanislavcapek.workattendancerest.v1.workattendance.web;
 
 import cz.stanislavcapek.workattendancerest.v1.shift.Shift;
-import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.PremiumPaymentsCounter;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.premiumpayments.service.PremiumPaymentsCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeCounter;
 import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeSum;
-import cz.stanislavcapek.workattendancerest.v1.shift.worktime.WorkTimeSumCounter;
+import cz.stanislavcapek.workattendancerest.v1.shift.worktime.service.WorkTimeSumCounter;
 import cz.stanislavcapek.workattendancerest.v1.workattendance.WorkAttendance;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
