@@ -34,10 +34,6 @@ public class Employee {
     @NonNull
     private String lastName;
 
-    public void setAssignedId(int assignedId) {
-        throw new IllegalStateException("Assigned ID can not be changed!");
-    }
-
     @JsonIgnore
     public String getFullName() {
         return String.format("%s %s", firstName, lastName);
